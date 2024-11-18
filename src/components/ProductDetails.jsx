@@ -1,11 +1,15 @@
 
 import { useParams } from 'react-router-dom';
+import sofaImg from '../assets/images/Sofa.jpg';
+import chairImg from '../assets/images/chair.jpg';
+import tableImg from '../assets/images/table.jpg';
+import lampImg from '../assets/images/lamp.jpg';
 
 const products = [
-  { id: 1, name: "Sofa", price: "$1200", description: "A comfortable sofa.", image: "https://via.placeholder.com/300" },
-  { id: 2, name: "Chair", price: "$300", description: "A stylish chair.", image: "https://via.placeholder.com/300" },
-  { id: 3, name: "Table", price: "$500", description: "A sturdy table.", image: "https://via.placeholder.com/300" },
-  { id: 4, name: "Lamp", price: "$150", description: "A modern lamp.", image: "https://via.placeholder.com/300" },
+  { id: 1, name: "Sofa", price: "$1200", description: "A comfortable sofa.", image: sofaImg  },
+  { id: 2, name: "Chair", price: "$300", description: "A stylish chair.", image: chairImg },
+  { id: 3, name: "Table", price: "$500", description: "A sturdy table.", image: tableImg },
+  { id: 4, name: "Lamp", price: "$150", description: "A modern lamp.", image:lampImg },
 ];
 
 const ProductDetails = () => {

@@ -1,11 +1,15 @@
 
 import { Link } from 'react-router-dom';
+import sofaImg from '../assets/images/Sofa.jpg';
+import chairImg from '../assets/images/chair.jpg';
+import tableImg from '../assets/images/table.jpg';
+import lampImg from '../assets/images/lamp.jpg';
 
 const products = [
-  { id: 1, name: "Sofa", price: "$1200", image: "https://via.placeholder.com/150" },
-  { id: 2, name: "Chair", price: "$300", image: "https://via.placeholder.com/150" },
-  { id: 3, name: "Table", price: "$500", image: "https://via.placeholder.com/150" },
-  { id: 4, name: "Lamp", price: "$150", image: "https://via.placeholder.com/150" },
+  { id: 1, name: "Sofa", price: "$1200", image: sofaImg },
+  { id: 2, name: "Chair", price: "$300", image: chairImg },
+  { id: 3, name: "Table", price: "$500", image: tableImg },
+  { id: 4, name: "Lamp", price: "$150", image: lampImg },
 ];
 
 const ProductGrid = () => {
@@ -16,7 +20,7 @@ const ProductGrid = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {products.map((product) => (
             <div key={product.id} className="border p-4 text-center">
-              <img src={product.image} alt={product.name} className="mb-4" />
+              <img src={product.image} alt={product.name} className="mb-4 w-full h-49 object-cover" />
               <h3 className="text-lg font-bold">{product.name}</h3>
               <p className="text-gray-700">{product.price}</p>
               <Link to={`/product/${product.id}`}>

@@ -50,7 +50,7 @@ const Header = () => {
             Home
           </NavLink>
           <NavLink
-            to="/Products"
+            to="/products"
             className={({ isActive }) =>
               isActive ? "text-yellow-500 font-bold" : ""
             }
@@ -58,7 +58,7 @@ const Header = () => {
             Products
           </NavLink>
           <NavLink
-            to="/About"
+            to="/about"
             className={({ isActive }) =>
               isActive ? "text-yellow-500 font-bold" : ""
             }
@@ -66,7 +66,7 @@ const Header = () => {
             About
           </NavLink>
           <NavLink
-            to="/Contact"
+            to="/contact"
             
             className={({ isActive }) =>
               isActive ? "text-yellow-500 font-bold" : ""

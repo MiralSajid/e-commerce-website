@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       />
       <h3 className="text-xl font-bold my-2">{name || 'Product Name'}</h3>
       <p className="text-gray-700">{price ? `$${price}` : 'Price Unavailable'}</p>
-      <Link href={`/product/${id || ''}`}>
+      <Link to={`/product/${id || ''}`}>
         <button
           className="bg-teal-600 text-white px-4 py-2 rounded-md mt-4 hover:bg-teal-500"
           disabled={!id}

@@ -11,11 +11,13 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Products from './pages/Products';
 import CartPage from './pages/CartPage';
+
 const App = () => {
   return (
     <div>
       <Header />
       <Routes>
+      <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -31,7 +33,7 @@ const App = () => {
             </>
           }
         />
-        <Route path="/product/:id" element={<ProductDetails />} />
+       
       </Routes>
       <Footer />
     </div>

@@ -1,52 +1,127 @@
-import { useCart } from "../components/CartContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { removeFromCart, updateQuantity, clearCart } from '../features/cartSlice';
+import { useState } from 'react';
 
 const CartPage = () => {
-  const { state } = useCart();
-  const totalAmount = state.items.reduce((total, item) => {
-    const price = parseFloat(item.price.replace('$', ''));
-    return total + price;
-  }, 0);
+  const items = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+  const [paymentError, setPaymentError] = useState('');
 
-  if (state.items.length === 0) {
-    return <h2 className="text-center mt-8">Your cart is empty!</h2>;
-  }
+  // Fixing Total Cost Calculation
+  const totalCost = items.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
+
+  const handleQuantityChange = (id, quantity) => {
+    if (quantity >= 1) {
+      dispatch(updateQuantity({ id, quantity }));
+    }
+  };
+
+  const handlePayment = () => {
+    if (!selectedPaymentMethod) {
+      setPaymentError('Please select a payment method.');
+    } else {
+      setPaymentError('');
+      alert(`Payment successful via ${selectedPaymentMethod}. Total: ${totalCost.toFixed(2)}`);
+      dispatch(clearCart());
+    }
+  };
 
   return (
     <div className="container mx-auto py-16">
-      <h2 className="text-2xl font-bold mb-6">Your Shopping Cart</h2>
-      <table className="w-full border">
-        <thead>
-          <tr>
-            <th className="border p-4">Product</th>
-            <th className="border p-4">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {state.items.map((item) => (
-            <tr key={item.id}>
-              <td className="border p-4">{item.name}</td>
-              <td className="border p-4">{item.price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="mt-6">
-        <h3 className="text-xl font-bold">Total Amount: ${totalAmount.toFixed(2)}</h3>
-      </div>
-      <div className="mt-8">
-        <h3 className="text-lg font-bold">Choose a Payment Method:</h3>
-        <div className="flex space-x-4 mt-4">
-          <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            PayPal
-          </button>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Credit Card
-          </button>
-          <button className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
-            Cash on Delivery
-          </button>
+      <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
+      {items.length === 0 ? (
+        <p>
+          Your cart is empty.{' '}
+          <Link to="/products" className="text-teal-600">
+            Continue shopping
+          </Link>
+        </p>
+      ) : (
+        <div>
+          <ul className="mb-6">
+            {items.map((item) => (
+              <li
+                key={item.id}
+                className="flex justify-between items-center mb-4 border-b pb-4"
+              >
+                <div>
+                  <h2 className="text-lg font-bold">{item.name}</h2>
+                  <p>Price: ${item.price}</p>
+                  <div className="flex items-center space-x-4">
+                    <label>
+                      Quantity:
+                      <input
+                        type="number"
+                        value={item.quantity}
+                        min="1"
+                        onChange={(e) =>
+                          handleQuantityChange(item.id, parseInt(e.target.value))
+                        }
+                        className="ml-2 border rounded px-2 w-16"
+                      />
+                    </label>
+                  </div>
+                </div>
+                <button
+                  onClick={() => dispatch(removeFromCart({ id: item.id }))}
+                  className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <h2 className="text-xl font-bold">Total: ${totalCost.toFixed(2)}</h2>
+
+          {/* Payment Section */}
+          <div className="mt-8">
+            <h3 className="text-lg font-bold mb-4">Select Payment Method:</h3>
+            <div className="flex flex-col space-y-4">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Credit Card"
+                  onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                  className="mr-2"
+                />
+                Credit Card
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="PayPal"
+                  onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                  className="mr-2"
+                />
+                PayPal
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Cash on Delivery"
+                  onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                  className="mr-2"
+                />
+                Cash on Delivery
+              </label>
+            </div>
+            {paymentError && (
+              <p className="text-red-500 mt-2">{paymentError}</p>
+            )}
+            <button
+              onClick={handlePayment}
+              className="mt-6 py-2 px-4 rounded bg-green-500 hover:bg-green-600 text-white"
+            >
+              Pay Now
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

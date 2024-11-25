@@ -43,11 +43,12 @@ const CartPage = () => {
           <ul className="mb-6">
             {items.map((item) => (
               <li
-                key={item.id}
+                key={item.uniqueKey}
                 className="flex justify-between items-center mb-4 border-b pb-4"
               >
                 <div>
                   <h2 className="text-lg font-bold">{item.name}</h2>
+                  <p>Colour:{item.selectedColor}</p>
                   <p>Price: ${item.price}</p>
                   <div className="flex items-center space-x-4">
                     <label>

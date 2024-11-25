@@ -8,10 +8,10 @@ import lampImg from '../assets/images/lamp.jpg';
 import { useState } from 'react';
 
 const products = [
-  { id: 1, name: "Sofa", price: 1200, description: "A comfortable sofa.", image: sofaImg, category: "Furniture", colors: ["Red", "Blue", "Gray"] },
-  { id: 2, name: "Chair", price: 300, description: "A stylish chair.", image: chairImg, category: "Furniture", colors: ["Black", "White", "Green"] },
+  { id: 1, name: "Sofa", price: 1200, description: "A comfortable sofa.", image: sofaImg, category: "Furniture", colors: ["White", "Brown", "Gray"] },
+  { id: 2, name: "Chair", price: 300, description: "A stylish chair.", image: chairImg, category: "Furniture", colors: ["Black", "White", "Brown"] },
   { id: 3, name: "Table", price: 500, description: "A sturdy table.", image: tableImg, category: "Furniture", colors: ["Brown", "Black", "White"] },
-  { id: 4, name: "Lamp", price: 150, description: "A modern lamp.", image: lampImg, category: "Lighting", colors: ["Yellow", "White", "Orange"] },
+  { id: 4, name: "Lamp", price: 150, description: "A modern lamp.", image: lampImg, category: "Lighting", colors: ["White", "Yellow", "Black"] },
 ];
 
 const ProductDetails = () => {

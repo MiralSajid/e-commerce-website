@@ -1,16 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../features/cartSlice';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import sofaImg from '../assets/images/Sofa.jpg';
 import chairImg from '../assets/images/chair.jpg';
 import tableImg from '../assets/images/table.jpg';
 import lampImg from '../assets/images/lamp.jpg';
 const products = [
-  { id: 1, name: "Sofa", price: "1200", description: "A comfortable sofa.", image: sofaImg  },
-  { id: 2, name: "Chair", price: "300", description: "A stylish chair.", image: chairImg },
-  { id: 3, name: "Table", price: "500", description: "A sturdy table.", image: tableImg },
-  { id: 4, name: "Lamp", price: "150", description: "A modern lamp.", image:lampImg },
+  { id: 1, name: "Sofa", price: 1200, description: "A comfortable sofa.", image: sofaImg, category: "Furniture" },
+  { id: 2, name: "Chair", price: 300, description: "A stylish chair.", image: chairImg, category: "Furniture" },
+  { id: 3, name: "Table", price: 500, description: "A sturdy table.", image: tableImg, category: "Furniture" },
+  { id: 4, name: "Lamp", price: 150, description: "A modern lamp.", image: lampImg, category: "Lighting" },
 ];
+
 const ProductDetails = () => {
   const { id } = useParams();
   const product = products.find((p) => p.id === parseInt(id,10));
@@ -26,7 +27,7 @@ const ProductDetails = () => {
   const handleAddToCart = () => {
     dispatch(addToCart(product));
   };
-
+  
   return (
     <div className="container mx-auto py-16">
       <div className="flex space-x-6">
@@ -44,6 +45,14 @@ const ProductDetails = () => {
           >
             {isAddedToCart ? 'Added to Cart' : 'Add to Cart'}
           </button>
+          
+          <Link to="/cart">
+            <button
+              className="py-2 px-4 mt-4 ml-4 rounded bg-blue-500 hover:bg-blue-600 text-white"
+            >
+              Go to Cart
+            </button>
+          </Link>
         </div>
       </div>
     </div>

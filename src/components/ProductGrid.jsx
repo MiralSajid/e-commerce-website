@@ -1,37 +1,62 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import sofaImg from '../assets/images/Sofa.jpg';
 import chairImg from '../assets/images/chair.jpg';
 import tableImg from '../assets/images/table.jpg';
 import lampImg from '../assets/images/lamp.jpg';
+import { useState } from 'react';
 
+// Products data with categories
 const products = [
-  { id: 1, name: "Sofa", price: "$1200", image: sofaImg },
-  { id: 2, name: "Chair", price: "$300", image: chairImg },
-  { id: 3, name: "Table", price: "$500", image: tableImg },
-  { id: 4, name: "Lamp", price: "$150", image: lampImg },
+  { id: 1, name: "Sofa", price: "$1200", image: sofaImg, category: "Furniture" },
+  { id: 2, name: "Chair", price: "$300", image: chairImg, category: "Furniture" },
+  { id: 3, name: "Table", price: "$500", image: tableImg, category: "Furniture" },
+  { id: 4, name: "Lamp", price: "$150", image: lampImg, category: "Lighting" },
 ];
 
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-};
+
+
 
 const ProductGrid = () => {
-  const query = useQuery();
-  const searchQuery = query.get('search')?.toLowerCase() || '';
+ 
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery)
-  );
+  const categories = ["All", "Furniture", "Lighting"];
+
+  // Filter products by search query and category
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
+    
+    return matchesCategory ;
+  });
 
   return (
     <section id="products" className="py-16">
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold mb-6">Trending Products for You</h2>
+
+        {/* Category Filter */}
+        <div className="mb-6 flex space-x-4">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 rounded ${
+                selectedCategory === category ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-800"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <div key={product.id} className="border p-4 text-center">
-                <img src={product.image} alt={product.name} className="mb-4 w-full h-49 object-cover" />
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="mb-4 w-full h-49 object-cover"
+                />
                 <h3 className="text-lg font-bold">{product.name}</h3>
                 <p className="text-gray-700">{product.price}</p>
                 <Link to={`/product/${product.id}`}>

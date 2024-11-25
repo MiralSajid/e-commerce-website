@@ -17,7 +17,7 @@ const Header = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    // Check if the search query matches a product name
+
     const product = products.find(
       (item) => item.name.toLowerCase() === searchQuery.toLowerCase()
     );
@@ -94,10 +94,14 @@ const Header = () => {
               Search
             </button>
           </form>
-          <Link to="/cart">
-            <span className="material-icons cursor-pointer text-2xl">
-              shopping_cart
-            </span>
+          <Link to="/cart" className="flex items-center space-x-2">
+            <span className="material-icons text-2xl">shopping_cart</span>
+            <img
+              src="/src/assets/images/cart.png"
+              alt="Cart Icon"
+              className="w-10 h-10 object-contain"
+            />
+            
           </Link>
         </div>
       </div>

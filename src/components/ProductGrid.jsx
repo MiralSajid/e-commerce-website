@@ -5,7 +5,7 @@ import tableImg from '../assets/images/table.jpg';
 import lampImg from '../assets/images/lamp.jpg';
 import { useState } from 'react';
 
-// Products data with categories
+
 const products = [
   { id: 1, name: "Sofa", price: "$1200", image: sofaImg, category: "Furniture" },
   { id: 2, name: "Chair", price: "$300", image: chairImg, category: "Furniture" },
@@ -13,26 +13,22 @@ const products = [
   { id: 4, name: "Lamp", price: "$150", image: lampImg, category: "Lighting" },
 ];
 
-
-
-
 const ProductGrid = () => {
- 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = ["All", "Furniture", "Lighting"];
 
-  // Filter products by search query and category
+  // Filter products by selected category
   const filteredProducts = products.filter((product) => {
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
-    
-    return matchesCategory ;
+    return matchesCategory;
   });
 
   return (
     <section id="products" className="py-16">
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold mb-6">Trending Products for You</h2>
+        <h1 className="text-2xl font-bold mb-3">Categories</h1>
 
         {/* Category Filter */}
         <div className="mb-6 flex space-x-4">
@@ -48,17 +44,24 @@ const ProductGrid = () => {
             </button>
           ))}
         </div>
+
+        {/* Product Grid */}
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="border p-4 text-center">
+              <div
+                key={product.id}
+                className="border p-4 flex flex-col justify-between items-center text-center rounded shadow-lg h-[350px]"
+              >
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="mb-4 w-full h-49 object-cover"
+                  className="mb-4 w-full h-40 object-cover rounded"
                 />
-                <h3 className="text-lg font-bold">{product.name}</h3>
-                <p className="text-gray-700">{product.price}</p>
+                <div className="flex flex-col flex-grow">
+                  <h3 className="text-lg font-bold mb-2">{product.name}</h3>
+                  <p className="text-gray-700">{product.price}</p>
+                </div>
                 <Link to={`/product/${product.id}`}>
                   <button className="bg-yellow-500 text-white py-2 px-4 mt-4 rounded hover:bg-yellow-600">
                     View Details

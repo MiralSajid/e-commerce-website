@@ -1,5 +1,6 @@
 
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+
+ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 // Mock products for search functionality
@@ -57,6 +58,7 @@ const Header = () => {
           >
             Products
           </NavLink>
+          
           <NavLink
             to="/about"
             className={({ isActive }) =>

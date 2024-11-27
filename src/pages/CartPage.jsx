@@ -12,10 +12,13 @@ const CartPage = () => {
   // Fixing Total Cost Calculation
   const totalCost = items.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
 
-  const handleQuantityChange = (id, quantity) => {
+  const handleQuantityChange = (uniqueKey, quantity) => {
     if (quantity >= 1) {
-      dispatch(updateQuantity({ id, quantity }));
+      dispatch(updateQuantity({ uniqueKey, quantity }));
     }
+  };
+  const handleRemove = (uniqueKey) => {
+    dispatch(removeFromCart({ uniqueKey }));
   };
 
   const handlePayment = () => {
@@ -58,7 +61,7 @@ const CartPage = () => {
                         value={item.quantity}
                         min="1"
                         onChange={(e) =>
-                          handleQuantityChange(item.id, parseInt(e.target.value))
+                          handleQuantityChange(item.uniqueKey, parseInt(e.target.value))
                         }
                         className="ml-2 border rounded px-2 w-16"
                       />
@@ -66,9 +69,9 @@ const CartPage = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() => dispatch(removeFromCart({ id: item.id }))}
-                  className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-                >
+                 onClick={() => handleRemove(item.uniqueKey)}
+                 className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+               >
                   Remove
                 </button>
               </li>

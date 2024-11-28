@@ -3,20 +3,26 @@ import sofaImg from '../assets/images/Sofa.jpg';
 import chairImg from '../assets/images/chair.jpg';
 import tableImg from '../assets/images/table.jpg';
 import lampImg from '../assets/images/lamp.jpg';
+import tableImg2 from "../assets/images/table3.jpg";
+import sofaImg3 from "../assets/images/sofa4.jpeg";
+import sofaImg4 from "../assets/images/sofa2.png";
 import { useState } from 'react';
 
 
 const products = [
-  { id: 1, name: "Sofa", price: "$1200", image: sofaImg, category: "Furniture" },
-  { id: 2, name: "Chair", price: "$300", image: chairImg, category: "Furniture" },
-  { id: 3, name: "Table", price: "$500", image: tableImg, category: "Furniture" },
-  { id: 4, name: "Lamp", price: "$150", image: lampImg, category: "Lighting" },
+  { id: 1, name: "Sofa", price: 1200, description: "A comfortable sofa.", image: sofaImg, category: "Sofas", colors: ["White", "Brown", "Gray"] },
+  { id: 2, name: "Wooden Chair", price: 300, description: "A stylish chair.", image: chairImg, category: "Chairs", colors: ["Black", "White", "Brown"] },
+  { id: 3, name: " Maze Table", price: 500, description: "A sturdy table.", image: tableImg, category: "Tables", colors: ["Brown", "Black", "White"] },
+  { id: 4, name: "Round Lamp", price: 150, description: "A modern lamp.", image: lampImg, category: "Lamps", colors: ["White", "Yellow", "Black"] },
+  { id: 5, name: "Luxury Sofa", price: 1400, description: "A luxury sofa.", image: sofaImg3, category: "Sofas", colors: ["Gray", "Black", "Cream"] },
+    { id: 6, name: "Sofa Chair", price: 1600, description: "A modern sofa.", image: sofaImg4, category: "Sofas", colors: ["Beige", "Navy", "Green"] },
+    { id: 7, name: "Round Bottom Table", price: 500, description: "A sturdy table.", image: tableImg2, category: "Tables", colors: ["Brown", "Black", "White"] },
 ];
 
 const ProductGrid = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", "Furniture", "Lighting"];
+  const categories = ["All", "Sofas", "Tables","Chairs","Lamps"];
 
   // Filter products by selected category
   const filteredProducts = products.filter((product) => {
@@ -73,6 +79,12 @@ const ProductGrid = () => {
         ) : (
           <p>No products found.</p>
         )}
+        <p>
+          Want more options?-
+          <Link to="/products" className="text-teal-600">
+            Explore All Products.
+          </Link>
+        </p>
       </div>
     </section>
   );

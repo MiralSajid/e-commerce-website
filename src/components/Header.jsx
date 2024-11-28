@@ -6,9 +6,21 @@ import { useState } from 'react';
 // Mock products for search functionality
 const products = [
   { id: 1, name: "Sofa" },
-  { id: 2, name: "Chair" },
-  { id: 3, name: "Table" },
-  { id: 4, name: "Lamp" },
+    { id: 2, name: "Wooden Chair" },
+    { id: 3, name: "Maze Table"},
+    { id: 4, name: "Round Lamp" },
+    { id: 5, name: "Large Sofa"},
+    { id: 6, name: "Luxury Sofa"},
+    { id: 7, name: "Sofa Chair"},
+    { id: 8, name: "Round Bottom Table"},
+    { id: 9, name: "Stylish Cross Bottom Table" },
+    { id: 10, name: "Round Table" },
+    { id: 11, name: "Birds Lamp" },
+    { id: 12, name: "Stand Lamp" },
+    { id: 13, name: "Designer Lamp" },
+    { id: 14, name: "Gray/Blue Chair" },
+    { id: 15, name: "Office Chair " },
+    { id: 16, name: "Pink Office Chair"},
 ];
 
 const Header = () => {
@@ -17,20 +29,29 @@ const Header = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-
+  
+    // Trim spaces and make search query case-insensitive
+    const trimmedQuery = searchQuery.trim().toLowerCase();
+  
+    if (!trimmedQuery) {
+      // If the search query is empty after trimming, navigate to the products page
+      navigate('/products');
+      return;
+    }
+  
     const product = products.find(
-      (item) => item.name.toLowerCase() === searchQuery.toLowerCase()
+      (item) => item.name.toLowerCase() === trimmedQuery
     );
-
+  
     if (product) {
       // Navigate to the product's details page
       navigate(`/product/${product.id}`);
     } else {
       // Navigate to the products page with the search query
-      navigate(`/products?search=${searchQuery}`);
+      navigate(`/products?search=${encodeURIComponent(trimmedQuery)}`);
     }
   };
+  
 
   return (
     <header className="bg-teal-900 text-white p-4">

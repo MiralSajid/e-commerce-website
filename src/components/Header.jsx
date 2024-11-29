@@ -52,14 +52,14 @@ const Header = () => {
     <header className="bg-teal-900 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-xl font-bold">
           <Link to="/" className="hover:text-yellow-500">
             FurnitureShop
           </Link>
         </h1>
 
         {/* Navigation Links */}
-        <nav className="flex space-x-4">
+        <nav className="flex space-x-4 px-2">
         <NavLink
             to="/"
             className={({ isActive }) =>
@@ -108,26 +108,40 @@ const Header = () => {
         </nav>
 
         {/* Search Bar and Cart */}
-        <div className="flex items-center space-x-4">
-          <form onSubmit={handleSearch} className="flex items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="p-2 rounded-md text-black focus:outline-none"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button
-              type="submit"
-              className="bg-yellow-500 text-white px-4 ml-2 rounded hover:bg-yellow-600"
-            >
-              Search
-            </button>
-          </form>
+        <div className="flex items-center sm:space-x-[2%]">
+        <form onSubmit={handleSearch} className="flex items-center">
+  <input
+    type="text"
+    placeholder="Search..."
+    className="p-2 rounded-md text-black border border-black focus:outline-none"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+  {/* Replace button with search icon */}
+  <button
+    type="submit"
+    className="ml-1 p-2 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-800"
+    aria-label="Search"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zm6-2l5 5"
+      />
+    </svg>
+  </button>
+  </form>
           <Link to="/cart" className="flex items-center space-x-2 hover:text-yellow-500">
-            <span className="material-icons text-2xl">shopping_cart</span>
             <img
-              src={new URL('/src/assets/images/cart.png', import.meta.url).href}
+              src={new URL('/src/assets/images/cart.jpg', import.meta.url).href}
               alt="Cart Icon"
               className="w-10 h-10 object-contain"
             />

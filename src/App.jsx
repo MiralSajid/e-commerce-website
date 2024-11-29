@@ -17,6 +17,7 @@ import Orders from './components/Orders';
 const App = () => {
   return (
     <div>
+      <div className="min-h-screen">
       <Header />
       <Routes>
       <Route path="/product/:id" element={<ProductDetails />} />
@@ -39,6 +40,7 @@ const App = () => {
         />
        
       </Routes>
+      </div>
       <Footer />
     </div>
   );

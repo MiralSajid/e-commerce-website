@@ -85,7 +85,16 @@ const Header = () => {
           >
             About
           </NavLink>
-          
+          <NavLink
+            to="/contact"
+            
+            className={({ isActive }) =>
+              isActive ? "text-yellow-500 font-bold" : ""
+            
+            }
+          >
+            Contact
+          </NavLink> 
           <NavLink
             to="/orders"
             

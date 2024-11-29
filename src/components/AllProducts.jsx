@@ -80,7 +80,7 @@ const AllProducts = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="mb-4 w-full h-40 object-cover rounded"
+                  className="mb-4 w-full h-full object-cover rounded"
                 />
                 <h3 className="text-lg font-bold mb-2">{product.name}</h3>
                 <p className="text-gray-700">${product.price}</p>

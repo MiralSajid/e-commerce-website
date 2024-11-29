@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeFromCart, updateQuantity, clearCart } from '../features/cartSlice';
 import { useState } from 'react';
+import { addOrder } from "../features/orderSlice";
 
 const CartPage = () => {
   const items = useSelector((state) => state.cart.items);
@@ -21,15 +22,32 @@ const CartPage = () => {
     dispatch(removeFromCart({ uniqueKey }));
   };
 
-  const handlePayment = () => {
-    if (!selectedPaymentMethod) {
-      setPaymentError('Please select a payment method.');
-    } else {
-      setPaymentError('');
-      alert(`Payment successful via ${selectedPaymentMethod}. Total: ${totalCost.toFixed(2)}`);
-      dispatch(clearCart());
-    }
-  };
+  
+
+const handlePayment = () => {
+  if (!selectedPaymentMethod) {
+    setPaymentError("Please select a payment method.");
+  } else {
+    setPaymentError("");
+    const orderId = new Date().getTime(); 
+    const newOrder = items.map((item) => ({
+      id: orderId, 
+      product: item.name,
+      quantity: item.quantity,
+      totalPrice: item.price * item.quantity,
+      status: "Active",
+      payment: "Paid",
+      color: item.selectedColor,
+    }));
+
+    // Dispatch each item as an order
+    newOrder.forEach((order) => dispatch(addOrder(order)));
+
+    alert(`Payment successful via ${selectedPaymentMethod}. Total: ${totalCost.toFixed(2)}`);
+    dispatch(clearCart());
+  }
+};
+
 
   return (
     <div className="container mx-auto py-16">

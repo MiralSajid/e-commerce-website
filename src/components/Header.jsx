@@ -85,15 +85,16 @@ const Header = () => {
           >
             About
           </NavLink>
+          
           <NavLink
-            to="/contact"
+            to="/orders"
             
             className={({ isActive }) =>
               isActive ? "text-yellow-500 font-bold" : ""
             
             }
           >
-            Contact
+            Orders
           </NavLink> 
         </nav>
 

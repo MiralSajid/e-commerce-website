@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import sofaImg from '../assets/images/Sofa.jpg';
-import chairImg from '../assets/images/chair.jpg';
+import chairImg from '../assets/images/Chair.jpg';
 import tableImg from '../assets/images/table.jpg';
 import lampImg from '../assets/images/lamp.jpg';
 import tableImg2 from "../assets/images/table3.jpg";
